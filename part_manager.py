@@ -31,7 +31,14 @@ def select_item(event):
     global selected_item
     index = parts_list.curselection()[0]
     selected_item = parts_list.get(index)
-    print(selected_item)
+    part_entry.delete(0, END)
+    part_entry.insert(END, selected_item[1])
+    customer_entry.delete(0, END)
+    customer_entry.insert(END, selected_item[2])
+    retailer_entry.delete(0, END)
+    retailer_entry.insert(END, selected_item[3])
+    price_entry.delete(0, END)
+    price_entry.insert(END, selected_item[4])
 
 
 # Remove an item
