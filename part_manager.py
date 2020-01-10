@@ -6,13 +6,19 @@ db = Database('store.db')
 
 # Populate the list view with data
 def populate_list():
+    parts_list.delete(0, END)
     for row in db.fetch():
         parts_list.insert(END, row)
 
 
 # Add an item
 def add_item():
-    print('Add')
+    db.insert(part_text.get(), customer_text.get(),
+              retailer_text.get(), price_text.get())
+    parts_list.delete(0, END)
+    parts_list.insert(END, (part_text.get(), customer_text.get(),
+                            retailer_text.get(), price_text.get()))
+    populate_list()
 
 
 # Remove an item
