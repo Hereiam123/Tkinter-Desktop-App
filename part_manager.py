@@ -1,9 +1,13 @@
 from tkinter import *
+from db import Database
+
+db = Database('store.db')
 
 
 # Populate the list view with data
 def populate_list():
-    print('Populate data')
+    for row in db.fetch():
+        parts_list.insert(END, row)
 
 
 # Add an item
@@ -11,29 +15,30 @@ def add_item():
     print('Add')
 
 
-#Remove an item
+# Remove an item
 def remove_item():
     print('Remove')
 
 
-#Update an item
+# Update an item
 def update_item():
     print('Update')
 
 
-#Clear text for item input
+# Clear text for item input
 def clear_text():
     print('Clear')
+
 
 # Create window
 app = Tk()
 
 # price
-price_text = StringVar()
-price_label = Label(app, text='price Name', font=('bold', 14), pady=20)
-price_label.grid(row=0, column=0, sticky=W)
-price_entry = Entry(app, textvariable=price_text)
-price_entry.grid(row=0, column=1)
+part_text = StringVar()
+part_label = Label(app, text='Part Name', font=('bold', 14), pady=20)
+part_label.grid(row=0, column=0, sticky=W)
+part_entry = Entry(app, textvariable=part_text)
+part_entry.grid(row=0, column=1)
 
 # Customer
 customer_text = StringVar()
@@ -87,6 +92,9 @@ clear_btn.grid(row=2, column=3)
 # Title and window width/height
 app.title('Price Manager')
 app.geometry('700x350')
+
+# Populate data
+populate_list()
 
 # Start program
 app.mainloop()
