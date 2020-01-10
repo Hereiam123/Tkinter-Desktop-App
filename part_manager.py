@@ -23,37 +23,47 @@ def add_item():
     parts_list.delete(0, END)
     parts_list.insert(END, (part_text.get(), customer_text.get(),
                             retailer_text.get(), price_text.get()))
+    clear_text()
     populate_list()
 
 
 # Bind below Listbox with a click event
 def select_item(event):
-    global selected_item
-    index = parts_list.curselection()[0]
-    selected_item = parts_list.get(index)
-    part_entry.delete(0, END)
-    part_entry.insert(END, selected_item[1])
-    customer_entry.delete(0, END)
-    customer_entry.insert(END, selected_item[2])
-    retailer_entry.delete(0, END)
-    retailer_entry.insert(END, selected_item[3])
-    price_entry.delete(0, END)
-    price_entry.insert(END, selected_item[4])
-
+    try:
+        global selected_item
+        index = parts_list.curselection()[0]
+        selected_item = parts_list.get(index)
+        part_entry.delete(0, END)
+        part_entry.insert(END, selected_item[1])
+        customer_entry.delete(0, END)
+        customer_entry.insert(END, selected_item[2])
+        retailer_entry.delete(0, END)
+        retailer_entry.insert(END, selected_item[3])
+        price_entry.delete(0, END)
+        price_entry.insert(END, selected_item[4])
+    except IndexError:
+        pass
 
 # Remove an item
 def remove_item():
-    db.remove()
+    db.remove(selected_item[0])
+    clear_text()
+    populate_list()
 
 
 # Update an item
 def update_item():
-    print('Update')
-
+    db.update(selected_item[0], part_text.get(
+    ), customer_text.get(), retailer_text.get(), price_text.get())
+    clear_text()
+    populate_list()
 
 # Clear text for item input
 def clear_text():
-    print('Clear')
+    part_entry.delete(0, END)
+    customer_entry.delete(0, END)
+    retailer_entry.delete(0, END)
+    price_entry.delete(0, END)
 
 
 # Create window
@@ -115,7 +125,7 @@ update_btn = Button(app, text="Update Part", width=12, command=update_item)
 update_btn.grid(row=2, column=2)
 
 # Buttons for clearing item input
-clear_btn = Button(app, text="Clear Input", width=12, command=clear_text)
+clear_btn = Button(app, text="Clear Inputs", width=12, command=clear_text)
 clear_btn.grid(row=2, column=3)
 
 # Title and window width/height

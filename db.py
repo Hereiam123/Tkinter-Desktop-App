@@ -25,7 +25,7 @@ class Database:
 
     def update(self, id, part, customer, retailer, price):
         self.cur.execute(
-            "UPDATE parts SET part = ?, customer = ?, retailer = ?, price = ?, WHERE id = ?", (part, customer, retailer, price, id))
+            "UPDATE parts SET part = ?, customer = ?, retailer = ?, price = ? WHERE id = ?", (part, customer, retailer, price, id))
 
     def __del__(self):
         self.conn.close()
