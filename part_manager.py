@@ -1,5 +1,30 @@
 from tkinter import *
 
+
+# Populate the list view with data
+def populate_list():
+    print('Populate data')
+
+
+# Add an item
+def add_item():
+    print('Add')
+
+
+#Remove an item
+def remove_item():
+    print('Remove')
+
+
+#Update an item
+def update_item():
+    print('Update')
+
+
+#Clear text for item input
+def clear_text():
+    print('Clear')
+
 # Create window
 app = Tk()
 
@@ -57,7 +82,7 @@ update_btn.grid(row=2, column=2)
 
 # Buttons for clearing item input
 clear_btn = Button(app, text="Clear Input", width=12, command=clear_text)
-clear_btn.grid(row=2, column=0)
+clear_btn.grid(row=2, column=3)
 
 # Title and window width/height
 app.title('Price Manager')
